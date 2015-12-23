@@ -1,16 +1,15 @@
-global._path =
-{
-	home : __dirname,
-	props : __dirname + "/properties",
-	src : __dirname + "/src"
-};
+var imp = require("./src/imp");
+imp.setPattern(__dirname + "/test/{{name}}.html");
+imp.setVars({path : {module : "모듈", lib : "립"}});
 
-var Imp = require(_path.src + "/imp");
-Imp.setLayoutMap({"/[a-z0-9]*" : "index"});
-Imp.setComponentPattern("test/{{name}}.html");
-Imp.setVars({path : {module : "모듈", lib : "립"}});
-
-Imp.getPage("/", function(html)
+imp.getHtml("index", {component : {body : "oday"}}, function(err, html)
 {
-	console.log("결과 : ", html);
+	if(err)
+	{
+		console.error("오류", err.stack);
+	}
+	else
+	{
+		console.log("결과 : ", html);
+	}
 });
