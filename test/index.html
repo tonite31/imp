@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+
+<title>Title</title>
+
+<link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
+
+<script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
+<script src="#{path.lib}/handlebars/handlebars-v1.3.0.js"></script>
+
+<script src="#{path.module}/imboard/js/imboard-api.js"></script>
+<script src="#{path.module}/imboard/js/imboard-ui.js"></script>
+<script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
+</head>
+
+<body>
+	${header}
+	<!-- 가변영역인데 기본값은 있어야 하지 않겠니? -->
+	${(1:main/today)}
+	${left}
+</body>
+
+</html>

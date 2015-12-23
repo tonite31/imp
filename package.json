@@ -1,0 +1,26 @@
+{
+  "name": "imp",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonite31/imp.git"
+  },
+  "main": "src/imp.js",
+  "dependencies": {
+    "async-foreach": "^0.1.3",
+    "request": "^2.67.0"
+  },
+  "keywords": [
+    "imp",
+    "fragment",
+    "msa",
+    "ui",
+    "template",
+    "rendering engine"
+  ],
+  "devDependencies": {},
+  "author": "Alprensia",
+  "homepage": "",
+  "license": "SEE LICENSE IN https://github.com/tonite31/imboard/blob/master/LICENSE"
+}
