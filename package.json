@@ -1,5 +1,5 @@
 {
-  "name": "imp",
+  "name": "nodejs-imp",
   "version": "0.0.1",
   "description": "",
   "repository": {
@@ -20,7 +20,7 @@
     "rendering engine"
   ],
   "devDependencies": {},
-  "author": "Alprensia",
+  "author": {"name" : "Alprensia", "email" : "tonite32@gmail.com"},
   "homepage": "",
   "license": "SEE LICENSE IN https://github.com/tonite31/imboard/blob/master/LICENSE"
 }
