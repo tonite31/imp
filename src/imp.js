@@ -4,7 +4,7 @@ var imp = {};
 {
 	this.collector = require("./collector");
 	
-	this.pattern = "";
+	this.pattern = {};
 	
 	this.vars = {}; //고정치환변수
 	
@@ -14,7 +14,8 @@ var imp = {};
 		{
 			var that = this;
 			
-			var url = this.pattern.replace(/{{name}}/gi, componentName);
+			var url = this.getUrl(componentName);
+			
 			this.collector.getComponent(url, function(err, data)
 			{
 				if(err)
@@ -66,6 +67,57 @@ var imp = {};
 			callback(err);
 		}
 	};
+	
+	this.getUrl = function(componentName)
+	{
+		var url = "";
+		
+		var prefix = "";
+		if(componentName.indexOf(":") != -1)
+		{
+			//prefix가 붙어있다면
+			var split = componentName.split(":");
+			prefix = split[0];
+			componentName = split[1];
+			
+			if(!prefix) // ${:test} 뭐 이런식으로 입력된 경우.
+			{
+				url = this.pattern[prefix].replace(/{{name}}/gi, componentName);
+			}
+			else
+			{
+				//prefix가 정말로 있으면. 먼저 일치하는거 우선
+				if(this.pattern[prefix])
+				{
+					url = this.pattern[prefix].replace(/{{name}}/gi, componentName).replace(/{{prefix}}/gi, prefix);
+				}
+				else
+				{
+					//일치하는게 없으면 key를 다 돌려서 일치하는거 찾아야함. 등록한 순서대로.
+					for(var key in this.pattern)
+					{
+						if(key)
+						{
+							var regex = new RegExp(key, "gi");
+							if(regex.test(prefix))
+							{
+								//일치하는 prefix 패턴이 있으면
+								url = this.pattern[key].replace(/{{name}}/gi, componentName).replace(/{{prefix}}/gi, prefix);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			//prefix가 없다면
+			url = this.pattern[prefix].replace(/{{name}}/gi, componentName);
+		}
+		
+		return url;
+	};
 
 	this.replaceVars = function(vars, data)
 	{
@@ -113,9 +165,12 @@ var imp = {};
 		this.vars = vars;
 	};
 	
-	this.setPattern = function(pattern)
+	this.setPattern = function(pattern, prefix)
 	{
-		this.pattern = pattern;
+		if(prefix)
+			this.pattern[prefix] = pattern;
+		else
+			this.pattern[''] = pattern;
 	};
 	
 	this.extend = function(target)
