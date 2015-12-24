@@ -4,7 +4,7 @@ var imp = {};
 {
 	this.collector = require("./collector");
 	
-	this.pattern = {};
+	this.pattern = {}; //컴포넌트 로딩용 패턴
 	
 	this.vars = {}; //고정치환변수
 	
