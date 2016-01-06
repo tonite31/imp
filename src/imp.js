@@ -26,7 +26,6 @@ var imp = {};
 				
 				data = this.replaceVars(this.extend({}, this.vars, params), data);
 				
-				//데이터 바인드를 했다고 치고
 				var matchList = data.match(/\$\{[a-zA-Z0-9\_\-\(\):\/]*\}/gi);
 				if(matchList)
 				{
@@ -43,7 +42,6 @@ var imp = {};
 							}
 							else if(html)
 							{
-								//여기서 component에 대한 데이터바인딩을 해야한다.
 								data = data.replace(match, html);
 							}
 							
