@@ -26,7 +26,7 @@ var imp = {};
 				
 				data = this.replaceVars(this.extend({}, this.vars, params), data);
 				
-				var matchList = data.match(/\$\{[a-zA-Z0-9\_\-\(\):\/]*\}/gi);
+				var matchList = data.match(/\$\{[a-zA-Z0-9\_\-\(\):\/\.]*\}/gi);
 				if(matchList)
 				{
 					var forEach = require('async-foreach').forEach;
