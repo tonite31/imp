@@ -1,6 +1,6 @@
-# imp
+# Imp
 
-is a nodejs module for html templating.
+Imp is a nodejs module for html templating.
 
 ## Installation
 ```
