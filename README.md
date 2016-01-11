@@ -2,6 +2,11 @@
 
 is a nodejs module for html templating.
 
+## Installation
+```
+npm install nodejs-imp
+```
+
 ## Example
 ```
 var imp = require('nodejs-imp');
@@ -52,10 +57,10 @@ use ${} syntax.
 
 ### head.html
 ```
-	<script type="text/javascript" src="example.js"></script>
-	<script type="text/javascript" src="example2.js"></script>
+<script type="text/javascript" src="example.js"></script>
+<script type="text/javascript" src="example2.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="index.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
 ```
 
 ### footer.html
