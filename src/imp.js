@@ -8,7 +8,7 @@ var imp = {};
 	
 	this.vars = {}; //고정치환변수
 	
-	this.getHtml = function(componentName, params, callback)
+	this.getView = function(componentName, params, callback)
 	{
 		try
 		{
