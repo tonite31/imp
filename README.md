@@ -29,17 +29,14 @@ for remote html.
 imp.setPattern("http://localhost:3001/views/{{name}}.html");
 ```
 
-for prefix for template name.
+prefix for template name.
 ```
 imp.setPattern(__dirname + "/views/{{name}}.html");
 imp.setPattern("http://localhost:3001/views/{{name}}.html", "remote");
 ```
 
-## How to write a template html.
-
 use ${} syntax.
-
-### index.html
+#### index.html
 ```
 <html>
 <head>
@@ -55,7 +52,7 @@ use ${} syntax.
 </html>
 ```
 
-### head.html
+#### head.html
 ```
 <script type="text/javascript" src="example.js"></script>
 <script type="text/javascript" src="example2.js"></script>
@@ -63,12 +60,13 @@ use ${} syntax.
 <link rel="stylesheet" type="text/css" href="index.css" />
 ```
 
-### footer.html
+#### footer.html
 ```
 <p>Code licensed under MIT, documentation under CC BY 3.0</p>
 ```
 
 ## Replace data
+A text syntax for rendering parameter.
 
 ### Syntax
 
@@ -82,7 +80,7 @@ use ${} syntax.
 res.render("index", {testValue : "test", user : {name : "Alprensia"}});
 ```
 
-## Example with express
+## With express
 ```
 var express = require('express');
 var app = express();
