@@ -1,8 +1,8 @@
 var imp = require("./src/imp");
-imp.setPattern(__dirname + "/test/{{name}}.html");
-imp.setPattern(__dirname + "/test/component/{{prefix}}_{{name}}.html", "[a-z0-9]*");
+imp.setPattern(__dirname + "/test/views/{{name}}.html");
+imp.setPattern(__dirname + "/test/views/component/{{prefix}}_{{name}}.html", "[a-z0-9]*");
 
-imp.getHtml("index", {component : {body : "main/today"}}, function(err, html)
+imp.getView("index", {component : {body : "main/today"}}, function(err, html)
 {
 	if(err)
 	{
