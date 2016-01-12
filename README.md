@@ -7,11 +7,42 @@ Imp is a view template engine for nodejs.
 npm install nodejs-imp
 ```
 
-## Example
+## Syntax
+
+#{} : It will be replaced to specific variable.
+
+${} : It will be replaced to specific view.
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<title>Imp</title>
+<script type="text/javascript" src="#{logic}"></script>
+</head>
+<body>
+	<h1>Imp is a view template engine for nodejs</h1>
+	${left}
+	${remote:body}
+</body>
+</html>
+```
+
+## API
 ```
 var imp = require('nodejs-imp');
-imp.setPattern(__dirname + "/views/{{name}}.html");
-imp.getHtml("index", {data : "test"}, function(err, html)
+
+//Set path pattern of view directory.
+//You can register many pattern of path. If you register a pattern with prefix, then you can use syntax "${prefix:name}".
+imp.setPattern(__dirname + "/views/{{name}}.html"); //{{name}} replaced to view name.
+imp.setPattern("http://localhost:3001/views/{{name}}.html", "remote"); //You can get a view file from remote server.
+
+//Parameter will be replaced to syntax "#{}". This is fixed variables.
+imp.setVars({}/*JSON object parameter*/);
+
+//Parameter will be replaced to syntax "#{}". This is dynamic variables.
+//Imp doesn't allow to duplicated key between fixed variables and dynamic variables.
+imp.getView("name of view", {}/*JSON object parameter*/, function(err, html)
 {
 	if(err)
 	{
@@ -20,64 +51,12 @@ imp.getHtml("index", {data : "test"}, function(err, html)
 	else
 	{
 		console.log(html);
+		
+		//Response to client
+		//res.writeHead(200, {"Content-Type" : "text/html"});
+		//res.end(html);
 	}
 });
-```
-
-for remote html.
-```
-imp.setPattern("http://localhost:3001/views/{{name}}.html");
-```
-
-prefix for template name.
-```
-imp.setPattern(__dirname + "/views/{{name}}.html");
-imp.setPattern("http://localhost:3001/views/{{name}}.html", "remote");
-```
-
-use ${} syntax.
-#### index.html
-```
-<html>
-<head>
-	${head}
-</head>
-<body>
-	<h1>Header</h1>
-	${body}
-	<footer>
-		${remote:footer}
-	</footer>
-</body>
-</html>
-```
-
-#### head.html
-```
-<script type="text/javascript" src="example.js"></script>
-<script type="text/javascript" src="example2.js"></script>
-	
-<link rel="stylesheet" type="text/css" href="index.css" />
-```
-
-#### footer.html
-```
-<p>Code licensed under MIT, documentation under CC BY 3.0</p>
-```
-
-## Replace data
-A text syntax for rendering parameter.
-
-### Syntax
-
-#### index.html
-```
-<p>#{testValue}</p>
-<p>#{user.name}</p>
-```
-### Render
-```
-res.render("index", {testValue : "test", user : {name : "Alprensia"}});
 ```
 
 ## With express
@@ -96,6 +75,6 @@ app.use(imp.render);
 
 app.get('/', function(req, res, next)
 {
-	res.render("index");
+	res.render("index", {});
 });
 ```
