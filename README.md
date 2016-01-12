@@ -9,11 +9,11 @@ npm install nodejs-imp
 
 ## Syntax
 
-#{} : It will be replaced to specific variable.
+\#{} : It will be replaced to specific variable.
 
 ${} : It will be replaced to specific view.
 
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +29,7 @@ ${} : It will be replaced to specific view.
 ```
 
 ## API
-```
+```javascript
 var imp = require('nodejs-imp');
 
 //Set path pattern of view directory.
@@ -60,7 +60,7 @@ imp.getView("name of view", {}/*JSON object parameter*/, function(err, html)
 ```
 
 ## With express
-```
+```javascript
 var express = require('express');
 var app = express();
 var server = app.listen(3000, function()
