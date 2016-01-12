@@ -180,7 +180,45 @@ var imp = {};
 	        }
 	    });
 	    return target;
-	}
+	};
+	
+	this.render = function(req, res, next)
+	{
+		var domain = require("domain");
+		var reqDomain = domain.create();
+
+	    reqDomain.add(req);
+	    reqDomain.add(res);
+
+    	res.render = function(name, param)
+		{
+    		imp.getHtml(name, param, function(err, html)
+			{
+				if(err)
+				{
+					res.status(500).send(err.stack);
+				}
+				else
+				{
+					res.writeHead(200, {"Content-Type" : "text/html"});
+					res.end(html);
+				}
+			});
+		};
+
+	    reqDomain.on('error', function (err)
+	    {
+	    	console.error("\n\n");
+	    	console.error("=================================================");
+	    	console.error("time : " + new Date().toString());
+	    	console.error("name : DomainException");
+	    	console.error("-------------------------------------------------");
+	    	console.error(err.stack);
+	    	console.error("=================================================\n\n");
+	    });
+
+	    reqDomain.run(next);
+	};
 	
 }).call(imp);
 

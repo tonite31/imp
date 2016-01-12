@@ -1,6 +1,6 @@
 # Imp
 
-Imp is a nodejs module for html templating.
+Imp is a view template engine for nodejs.
 
 ## Installation
 ```
@@ -66,4 +66,38 @@ use ${} syntax.
 ### footer.html
 ```
 <p>Code licensed under MIT, documentation under CC BY 3.0</p>
+```
+
+## Replace data
+
+### Syntax
+
+#### index.html
+```
+<p>#{testValue}</p>
+<p>#{user.name}</p>
+```
+### Render
+```
+res.render("index", {testValue : "test", user : {name : "Alprensia"}});
+```
+
+## Example with express
+```
+var express = require('express');
+var app = express();
+var server = app.listen(3000, function()
+{
+	console.log('Listening on port %d', server.address().port);
+});
+
+var imp = require('nodejs-imp');
+imp.setPattern(__dirname + "/views/template/{{name}}.html");
+
+app.use(imp.render);
+
+app.get('/', function(req, res, next)
+{
+	res.render("index");
+});
 ```
