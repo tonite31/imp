@@ -3,12 +3,32 @@ var imp = {};
 (function()
 {
 	this.collector = require("./collector");
+	this.binder = require("./binder");
 	
 	this.pattern = {}; //컴포넌트 로딩용 패턴
 	
 	this.vars = {}; //고정치환변수
-	
+
 	this.getView = function(componentName, params, callback)
+	{
+		this.getHtml(componentName, params, function(err, html)
+		{
+			if(err)
+			{
+				callback(err);
+			}
+			else
+			{
+				//여기서 데이터 바인드
+				this.binder.getHtml(html, params, function(html)
+				{
+					callback(null, html);
+				});
+			}
+		}.bind(this));
+	};
+	
+	this.getHtml = function(componentName, params, callback)
 	{
 		try
 		{
@@ -182,6 +202,11 @@ var imp = {};
 	    return target;
 	};
 	
+	this.addModule = function(key, module)
+	{
+		this.binder.modules[key] = module;
+	};
+	
 	this.render = function(req, res, next)
 	{
 		var domain = require("domain");
@@ -192,7 +217,7 @@ var imp = {};
 
     	res.render = function(name, param)
 		{
-    		imp.getHtml(name, param, function(err, html)
+    		imp.getView(name, param, function(err, html)
 			{
 				if(err)
 				{
@@ -200,6 +225,8 @@ var imp = {};
 				}
 				else
 				{
+					//여기서 데이터 바인드
+					
 					res.writeHead(200, {"Content-Type" : "text/html"});
 					res.end(html);
 				}
