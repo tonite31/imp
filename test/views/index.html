@@ -14,13 +14,33 @@
 <script src="#{path.module}/imboard/js/imboard-api.js"></script>
 <script src="#{path.module}/imboard/js/imboard-ui.js"></script>
 <script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
+
+<script id="test" type="text/template">
+{{#if testList}}
+{{#each testList}}
+<a>{{value}}</a>
+{{/each}}
+{{/if}}
+<div data-bind="test" data-param='{"test2" : "abc2"}' data-template="#test2"></div>
+</script>
+
 </head>
 
 <body>
-	${header}
-	<!-- 가변영역인데 기본값은 있어야 하지 않겠니? -->
-	${#{component.body}}
-	${left}
+	<script id="test2" type="text/template">
+{{#if testList}}
+{{#each testList}}
+	<p>{{value}}</p>
+{{/each}}
+{{/if}}
+</script>
+	{{#if test}}
+	<p>Yaho</p>
+	{{else}}
+	<p>Go out!</p>
+	{{/if}}
+	<div data-bind="test" data-param='{"test" : "abc"}' data-template="#test"></div>
+	<div data-bind="test" data-param='{"test" : "abc"}' data-template="#test"></div>
 </body>
 
 </html>
