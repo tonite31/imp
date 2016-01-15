@@ -19,7 +19,6 @@ var imp = {};
 			}
 			else
 			{
-				//여기서 데이터 바인드
 				this.binder.getHtml(html, params, function(html)
 				{
 					callback(null, html);
@@ -225,8 +224,6 @@ var imp = {};
 				}
 				else
 				{
-					//여기서 데이터 바인드
-					
 					res.writeHead(200, {"Content-Type" : "text/html"});
 					res.end(html);
 				}

@@ -17,7 +17,6 @@ var binder = {};
 		
 		this.databind($, "body", function(html)
 		{
-			console.log("에이치티엠엘 : ", html);
 			$ = cheerio.load(html);
 			html = $("body").html();
 			

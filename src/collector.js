@@ -62,11 +62,6 @@ var collector = {};
 		}
 	};
 	
-	this.setPattern = function(pattern)
-	{
-		this.pattern = pattern;
-	};
-	
 }).call(collector);
 
 module.exports = collector;
