@@ -8,6 +8,8 @@ var imp = {};
 	this.pattern = {}; //컴포넌트 로딩용 패턴
 	
 	this.vars = {}; //고정치환변수
+	
+	this.renderModules = [];
 
 	this.getView = function(componentName, params, callback)
 	{
@@ -21,8 +23,23 @@ var imp = {};
 			{
 				this.binder.getHtml(html, params, function(html)
 				{
-					callback(null, html);
-				});
+					var forEach = require('async-foreach').forEach;
+					forEach(this.renderModules, function(module, index)
+					{
+						var done = this.async();
+						
+						module(html, function(result)
+						{
+							html = result;
+							done();
+						});
+						
+					}, function(){
+						callback(null, html);
+					});
+					
+//					callback(null, html);
+				}.bind(this));
 			}
 		}.bind(this));
 	};
@@ -201,9 +218,14 @@ var imp = {};
 	    return target;
 	};
 	
-	this.addModule = function(key, module)
+	this.addBinderModule = function(key, module)
 	{
 		this.binder.modules[key] = module;
+	};
+	
+	this.addRenderModule = function(func)
+	{
+		this.renderModules.push(func);
 	};
 	
 	this.render = function(req, res, next)
