@@ -5,11 +5,7 @@ var binder = {};
 
 (function()
 {
-	this.modules = {test : function(param, done)
-	{
-		var testList = [{value : '1'}, {value : '2'}, {value : '3'}, {value : '4'}, {value : '5'}];
-		done({testList : testList});
-	}};
+	this.modules = {};
 	
 	this.getHtml = function(html, params, callback)
 	{
