@@ -223,6 +223,11 @@ var imp = {};
 		this.binder.modules[key] = module;
 	};
 	
+	this.setBinderModules = function(modules)
+	{
+		this.binder.modules = modules;
+	};
+	
 	this.addRenderModule = function(func)
 	{
 		this.renderModules.push(func);
