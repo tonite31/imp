@@ -74,6 +74,10 @@ var binder = {};
 							});
 						});
 					}
+					else
+					{
+						done();
+					}
 				}
 				catch(err)
 				{
