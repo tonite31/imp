@@ -1,5 +1,8 @@
 #History
 
+## 0.0.4
+Fix bugs.
+
 ## 0.0.3
 The addModule is changed to addBinderModule.
 The addRenderModule function is added.
