@@ -85,10 +85,6 @@ var binder = {};
 					console.log(err.stack);
 					$(element).html(err.stack);
 				}
-				finally
-				{
-					done();
-				}
 			},
 			function()
 			{
