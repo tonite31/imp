@@ -47,7 +47,7 @@ var binder = {};
 				
 				if(templateId)
 				{
-					var template = $(templateId).html();
+					template = $(templateId).html();
 					$("head").append($(templateId).remove());
 				}
 				else
@@ -57,7 +57,17 @@ var binder = {};
 				
 				try
 				{
-					param = JSON.parse(param);
+					if(param)
+						param = JSON.parse(param);
+					else
+						param = {}
+					
+					if(!template)
+					{
+						//템플릿 없다고 표시.
+						$(element).html("Template not found.");
+						done();
+					}
 					
 					template = template.replace(/&quot;/gi, "\"").replace(/&amp;/gi, "&").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&apos;/gi, "\'");
 					
