@@ -13,13 +13,7 @@ var binder = {};
 		
 		this.databind($, "body", function(html)
 		{
-			$ = cheerio.load(html);
-			html = $("body").html();
-			
-			var template = Handlebars.compile(html);
-			
-			$("body").html(template(params));
-			callback($.html());
+			callback(html);
 		});
 	};
 	
