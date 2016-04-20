@@ -1,5 +1,8 @@
 #History
 
+## 0.0.6
+Fix bugs.
+
 ## 0.0.5
 Fix bugs.
 
