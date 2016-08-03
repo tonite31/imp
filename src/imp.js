@@ -186,8 +186,10 @@ var imp = {};
 						value = vars[key];
 				}
 				
-				if(value)
-					data = data.replace(matchList[i], value);
+				if(!value)
+					value = '';
+				
+				data = data.replace(matchList[i], value);
 			}
 		}
 		
