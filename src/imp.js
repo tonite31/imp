@@ -155,7 +155,7 @@ var imp = {};
 
 	this.replaceVars = function(vars, data)
 	{
-		var matchList = data.match(/#{[a-zA-Z0-9\.]*}/gi);
+		var matchList = data.match(/#{[a-zA-Z0-9\_\-\.]*}/gi);
 		if(matchList)
 		{
 			for(var i=0; i<matchList.length; i++)
